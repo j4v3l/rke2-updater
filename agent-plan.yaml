@@ -1,25 +1,28 @@
 apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
-  name: agent-plan
-  namespace: system-upgrade
+  name: rke2-worker-plan
+  namespace: cattle-system
   labels:
-    rke2-upgrade: agent
+    rke2-upgrade: "true"
 spec:
   concurrency: 2
   nodeSelector:
     matchExpressions:
-      - {key: node-role.kubernetes.io/control-plane, operator: NotIn, values: ["true"]}
-  tolerations:
-  - key: "CriticalAddonsOnly"
-    operator: "Equal"
-    value: "true"
-    effect: "NoExecute"
+      - { key: node-role.kubernetes.io/worker, operator: Exists }
   serviceAccountName: system-upgrade
   cordon: true
-  # Uncomment if draining is required
-  # drain:
-  #   force: true
   upgrade:
-    image: rancher/rke2-upgrade
-  channel: https://update.rke2.io/v1-release/channels/stable
+    image: rancher/rke2-upgrade:v1.30.1
+  prepare:
+    args:
+    - prepare
+    - agent
+  drain:
+    force: true
+  version: v1.30.1+rke2r1
+  secrets:
+    - name: rke2-agent-token
+  tolerations:
+  - key: "CriticalAddonsOnly"
+    operator: "Exists"

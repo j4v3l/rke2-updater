@@ -14,14 +14,14 @@ spec:
   cordon: true
   upgrade:
     image: rancher/rke2-upgrade  # Correct image version
-    version: v1.31.0+rke2r1
+    # version: v1.31.0+rke2r1
   prepare:
     args:
     - prepare
     - agent
   drain:
     force: true
-  #channel: https://update.rke2.io/v1-release/channels/stable
+  channel: https://update.rke2.io/v1-release/channels/stable
   secrets:
     - name: rke2-agent-token  # Ensure this secret exists in the system-upgrade namespace
   tolerations:

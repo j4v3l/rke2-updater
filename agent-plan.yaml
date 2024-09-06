@@ -13,7 +13,7 @@ spec:
   serviceAccountName: system-upgrade
   cordon: true
   upgrade:
-    image: rancher/rke2-upgrade
+    image: rancher/rke2-upgrade:latest
   prepare:
     args:
     - prepare

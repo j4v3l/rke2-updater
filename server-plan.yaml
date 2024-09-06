@@ -2,7 +2,7 @@ apiVersion: upgrade.cattle.io/v1
 kind: Plan
 metadata:
   name: rke2-master-plan
-  namespace: cattle-system
+  namespace: system-upgrade
   labels:
     rke2-upgrade: "true"
 spec:
@@ -13,7 +13,7 @@ spec:
   serviceAccountName: system-upgrade
   cordon: true
   upgrade:
-    image: rancher/rke2-upgrade
+    image: rancher/rke2-upgrade:latest
   prepare:
     args:
     - prepare

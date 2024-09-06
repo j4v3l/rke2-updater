@@ -48,8 +48,10 @@ metadata:
 rules:
 - apiGroups:
   - batch
+  - apiextensions.k8s.io
   resources:
   - jobs
+  - ustomresourcedefinitionsv
   verbs:
   - create
   - delete

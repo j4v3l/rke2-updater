@@ -13,21 +13,21 @@ spec:
   serviceAccountName: system-upgrade
   cordon: true
   upgrade:
-    image: rancher/rke2-upgrade  # Ensure the image has the correct version
-    # version: v1.31.0+rke2r1
+    image: rancher/rke2-upgrade # Ensure the image has the correct version
+    version: v1.31.0+rke2r1
   prepare:
     args:
-    - prepare
-    - server
+      - prepare
+      - server
   drain:
     force: true
   channel: https://update.rke2.io/v1-release/channels/latest
   secrets:
-    - name: rke2-server-token  # Ensure the secret exists in the system-upgrade namespace
+    - name: rke2-server-token # Ensure the secret exists in the system-upgrade namespace
   tolerations:
-  - key: "CriticalAddonsOnly"
-    operator: "Exists"
-  - key: "node-role.kubernetes.io/control-plane"
-    operator: "Exists"
-  - key: "node-role.kubernetes.io/master"
-    operator: "Exists"
+    - key: "CriticalAddonsOnly"
+      operator: "Exists"
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+    - key: "node-role.kubernetes.io/master"
+      operator: "Exists"

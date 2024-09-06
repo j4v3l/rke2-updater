@@ -13,8 +13,7 @@ spec:
   serviceAccountName: system-upgrade
   cordon: true
   upgrade:
-    image: rancher/rke2-upgrade # Ensure the image has the correct version
-    version: v1.31.0+rke2r1
+    image: rancher/rke2-upgrade:v1.31.0-rke2r1  # Specify the correct image
   prepare:
     args:
       - prepare
@@ -23,7 +22,7 @@ spec:
     force: true
   channel: https://update.rke2.io/v1-release/channels/latest
   secrets:
-    - name: rke2-server-token # Ensure the secret exists in the system-upgrade namespace
+    - name: rke2-server-token  # Ensure this secret exists in the system-upgrade namespace
   tolerations:
     - key: "CriticalAddonsOnly"
       operator: "Exists"
